@@ -1,0 +1,12 @@
+{
+    "id": "usbManager",
+    "name": "USB Manager",
+    "description": "Bar widget: monitor USB drives, mount/unmount, format, resize. Shows notifications when USB plugged/removed.",
+    "version": "1.1.1",
+    "author": "NordicsSys",
+    "icon": "usb",
+    "type": "widget",
+    "component": "./USBManager.qml",
+    "settings": "./USBManagerSettings.qml",
+    "permissions": ["settings_read", "settings_write", "process"]
+}
