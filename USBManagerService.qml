@@ -20,7 +20,7 @@ Singleton {
 
     // Path to plugin directory (for helper scripts)
     readonly property string pluginDir: {
-        const cfg = Quickshell.env("HOME") + "/.config/DankMaterialShell/plugins/USBManager";
+        const cfg = Quickshell.env("HOME") + "/.config/DankMaterialShell/plugins/usbManager";
         return cfg;
     }
 
