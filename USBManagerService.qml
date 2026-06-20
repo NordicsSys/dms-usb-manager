@@ -16,6 +16,9 @@ Singleton {
 
     property var devices: []
     property bool isLoading: false
+    // Tracks whether the first list has ever completed, so periodic background
+    // polls don't flash the "Loading…" placeholder while the popout is open.
+    property bool _hasLoadedOnce: false
     signal devicesUpdated()
 
     // Resolved at startup: DMS installs to ~/.config/DankMaterialShell/plugins/<id> (usbManager).
@@ -26,9 +29,13 @@ Singleton {
     function refreshDevices() {
         if (!_pluginDirReady || !pluginDir)
             return;
-        isLoading = true;
+        // Only show the spinner on the genuine first load. Background polls
+        // (every 5s) must not toggle isLoading, or the list flickers each tick.
+        if (!_hasLoadedOnce)
+            isLoading = true;
         Proc.runCommand("usbManager:list", ["bash", pluginDir + "/helpers/usb_manager.sh", "list"], (output, exitCode) => {
             isLoading = false;
+            _hasLoadedOnce = true;
             if (exitCode !== 0) {
                 console.error("USBManager: list failed:", output);
                 ToastService.showError("USB Manager", "Failed to list USB devices.");
@@ -36,6 +43,11 @@ Singleton {
             }
             try {
                 const arr = JSON.parse(output || "[]");
+                // Skip the reassignment when nothing changed: a fresh array from
+                // JSON.parse resets the ListView model and rebuilds every delegate,
+                // which is the visible flicker on each periodic refresh.
+                if (JSON.stringify(arr) === JSON.stringify(root.devices))
+                    return;
                 root.devices = arr;
                 root.devicesUpdated();
             } catch (e) {
