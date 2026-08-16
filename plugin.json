@@ -1,8 +1,8 @@
 {
     "id": "usbManager",
     "name": "USB Manager",
-    "description": "Bar widget: monitor USB drives, mount/unmount, format, resize. Shows notifications when USB plugged/removed.",
-    "version": "1.2.0",
+    "description": "Bar widget: monitor USB drives, mount/unmount, format, resize. Shows notifications when USB plugged/removed. Option to always show or only show when a drive is connected.",
+    "version": "1.3.0",
     "author": "NordicsSys",
     "icon": "usb",
     "type": "widget",

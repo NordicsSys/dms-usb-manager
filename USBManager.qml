@@ -18,21 +18,24 @@ PluginComponent {
 
     horizontalBarPill: Component {
         // Icon-only pill to keep the widget compact (~square in the bar).
+        // Hidden when no USB drives are connected, unless "Always show" is on.
         DankIcon {
             name: "usb"
             color: USBManagerService.devices.length > 0 ? Theme.primary : Theme.surfaceVariantText
             size: root.iconSize
             anchors.verticalCenter: parent.verticalCenter
+            visible: USBManagerService.devices.length > 0 || root.pluginData.showWhenEmpty
         }
     }
 
     verticalBarPill: Component {
-        // Icon-only vertical pill.
+        // Icon-only vertical pill. Same visibility rule as the horizontal pill.
         DankIcon {
             name: "usb"
             color: USBManagerService.devices.length > 0 ? Theme.primary : Theme.surfaceVariantText
             size: root.iconSize
             anchors.horizontalCenter: parent.horizontalCenter
+            visible: USBManagerService.devices.length > 0 || root.pluginData.showWhenEmpty
         }
     }
 
