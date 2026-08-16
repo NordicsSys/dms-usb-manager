@@ -29,6 +29,51 @@ PluginSettings {
     }
 
     StyledText {
+        text: "Bar Visibility"
+        font.pixelSize: Theme.fontSizeMedium
+        font.weight: Font.DemiBold
+        color: Theme.surfaceText
+    }
+
+    RowLayout {
+        width: parent.width
+        spacing: Theme.spacingS
+
+        StyledText {
+            text: "Always show icon in the bar"
+            font.pixelSize: Theme.fontSizeSmall
+            color: Theme.surfaceText
+            Layout.fillWidth: true
+            wrapMode: Text.WordWrap
+        }
+
+        DankButton {
+            text: root.pluginData.showWhenEmpty ? "On" : "Off"
+            buttonHeight: 32
+            backgroundColor: root.pluginData.showWhenEmpty ? Theme.primaryContainer : Theme.buttonBg
+            textColor: root.pluginData.showWhenEmpty ? Theme.primary : Theme.buttonText
+            onClicked: {
+                const next = !root.pluginData.showWhenEmpty;
+                SettingsData.setPluginSetting("usbManager", "showWhenEmpty", next);
+            }
+        }
+    }
+
+    StyledText {
+        text: "When off, the bar icon is hidden until a USB drive is connected."
+        font.pixelSize: Theme.fontSizeSmall
+        color: Theme.surfaceVariantText
+        width: parent.width
+        wrapMode: Text.WordWrap
+    }
+
+    StyledRect {
+        width: parent.width
+        height: 1
+        color: Theme.surfaceVariant
+    }
+
+    StyledText {
         text: "Usage"
         font.pixelSize: Theme.fontSizeMedium
         font.weight: Font.DemiBold
