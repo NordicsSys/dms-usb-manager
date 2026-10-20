@@ -2,6 +2,14 @@
 
 Bar widget for removable USB drives: list devices, mount/unmount, eject, format (FAT32 / exFAT / ext4), and resize partitions. A background daemon watches `udisksctl` and shows connect/disconnect notifications.
 
+## What this solves
+
+Manage removable drives from the desktop shell instead of switching between command-line tools. This project demonstrates QML user interfaces, Linux device integration, background monitoring, and shell helpers.
+
+[Developer portfolio](https://nikaj.dev) · [Discuss Linux automation](mailto:contact@nikaj.dev)
+
+Formatting erases the selected filesystem and resizing changes partitions. Back up the drive and verify the selected device before using those actions; removable-drive checks do not replace that review.
+
 ## Screenshots
 
 | Bar popout (device list) | Mounted drive + path |
